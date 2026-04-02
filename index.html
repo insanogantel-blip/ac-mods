@@ -11,12 +11,13 @@
             color: white;
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
+            padding: 0;
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* BARRA LATERAL */
+        /* BARRA LATERAL (PC) */
         .sidebar {
             width: 240px;
             background-color: #000b1a;
@@ -92,14 +93,17 @@
             text-transform: uppercase;
         }
 
-        .grid { display: flex; flex-wrap: wrap; gap: 25px; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
 
         .card {
             background: rgba(15, 15, 15, 0.8);
             border: 1px solid #222;
             border-radius: 15px;
             padding: 25px;
-            width: 280px;
             transition: 0.4s;
             text-align: center;
         }
@@ -119,11 +123,12 @@
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        .btn-buy:hover { background: #00ff88; color: #000; }
+        .btn-buy:hover { background: #00ff88; color: #000; box-shadow: 0 0 15px #00ff88; }
 
-        /* REPRODUCTOR POR URL */
+        /* REPRODUCTOR */
         .music-player {
             position: fixed;
             bottom: 25px;
@@ -137,15 +142,35 @@
         }
 
         audio { height: 35px; width: 220px; }
+
+        /* AJUSTES PARA MÓVIL */
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow: auto; }
+            .sidebar { 
+                width: 100%; 
+                height: auto; 
+                flex-direction: row; 
+                overflow-x: auto; 
+                padding: 10px; 
+                border-right: none; 
+                border-bottom: 2px solid #007bff;
+            }
+            .sidebar h1 { display: none; }
+            .sidebar button { padding: 8px 12px; font-size: 0.7rem; white-space: nowrap; }
+            .main-content { height: auto; padding: 20px; }
+            .owner-names { font-size: 1.5rem; }
+            .music-player { width: 80%; left: 10%; right: 10%; bottom: 10px; padding: 10px; }
+            audio { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
         <h1>AC MODS</h1>
-        <button onclick="document.getElementById('gms').scrollIntoView()">GAMEMODES (GM)</button>
-        <button onclick="document.getElementById('skins').scrollIntoView()">SKINS PERSONALIZADAS</button>
-        <button onclick="document.getElementById('maps').scrollIntoView()">MAPAS ÚNICOS (MAP)</button>
+        <button onclick="document.getElementById('gms').scrollIntoView({behavior: 'smooth'})">GAMEMODES</button>
+        <button onclick="document.getElementById('skins').scrollIntoView({behavior: 'smooth'})">SKINS</button>
+        <button onclick="document.getElementById('maps').scrollIntoView({behavior: 'smooth'})">MAPAS</button>
     </div>
 
     <div class="main-content">
@@ -159,8 +184,8 @@
             <div class="grid">
                 <div class="card">
                     <h3>GM ROLEPLAY Y GM ZONES</h3>
-                    <p style="color:#666">Base optimizada 0.3.7 Nosotros mismo tela ponemos</p>
-                    <button class="btn-buy">Comprar Ahora</button>
+                    <p style="color:#666">Base optimizada 0.3.7. Nosotros mismos te la instalamos.</p>
+                    <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3', '_blank')">Comprar Ahora</button>
                 </div>
             </div>
         </div>
@@ -170,8 +195,8 @@
             <div class="grid">
                 <div class="card">
                     <h3>SKIN EXCLUSIVO</h3>
-                    <p style="color:#666">Skin Personalizada al Gusto</p>
-                    <button class="btn-buy">Comprar Ahora</button>
+                    <p style="color:#666">Skin Personalizada al Gusto.</p>
+                    <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3', '_blank')">Comprar Ahora</button>
                 </div>
             </div>
         </div>
@@ -180,16 +205,16 @@
             <h2>Apartado: Mapas</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>MAPEOS UNICOS Y EXLUSIVOS</h3>
-                    <p style="color:#666">Mapeo único sin lag</p>
-                    <button class="btn-buy">Comprar Ahora</button>
+                    <h3>MAPEOS UNICOS Y EXCLUSIVOS</h3>
+                    <p style="color:#666">Mapeo único sin lag.</p>
+                    <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3', '_blank')">Comprar Ahora</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="music-player">
-        <p style="margin:0 0 10px 0; font-size: 10px; color:#007bff;">🎵 REPRODUCIENDO DESDE URL</p>
+        <p style="margin:0 0 10px 0; font-size: 10px; color:#007bff;">🎵 AC MODS RADIO</p>
         <audio id="bg-music" controls loop>
             <source src="https://files.catbox.moe/dzta7y.mp4" type="audio/mpeg">
             Tu navegador no soporta audio.

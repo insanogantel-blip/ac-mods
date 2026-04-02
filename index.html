@@ -3,74 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AC STORE - Official Shop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>AC MODS | Store</title>
     <style>
-        body { background-color: #0b0f1a; color: white; font-family: 'Inter', sans-serif; }
-        .store-card { background: #161b2b; border: 1px solid #2d3748; border-radius: 12px; overflow: hidden; transition: 0.3s; }
-        .store-card:hover { border-color: #3b82f6; transform: scale(1.02); }
-        .price-tag { background-color: #10b981; color: white; padding: 4px 12px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; }
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* MENU LATERAL */
+        .sidebar {
+            width: 220px;
+            background-color: #000b1a;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-right: 2px solid #007bff;
+            flex-shrink: 0;
+        }
+
+        .sidebar h1 {
+            color: #007bff;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #007bff;
+        }
+
+        .sidebar button {
+            background: rgba(0, 123, 255, 0.1);
+            color: white;
+            border: 1px solid #007bff;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .sidebar button:hover {
+            background: #007bff;
+            box-shadow: 0 0 15px #007bff;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: radial-gradient(circle at top, #001a33 0%, #050505 100%);
+        }
+
+        /* SECCIÓN DE OWNERS (APARTADO ESPECIAL) */
+        .section-owners {
+            background: rgba(0, 123, 255, 0.05);
+            border: 1px solid #007bff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .section-owners h2 {
+            margin: 0;
+            color: #007bff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .owner-names {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* ESTILO DE SECCIONES DE PRODUCTOS */
+        .product-section {
+            margin-bottom: 50px;
+        }
+
+        .product-section h2 {
+            border-left: 5px solid #007bff;
+            padding-left: 15px;
+            margin-bottom: 25px;
+            color: #00a2ff;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* TARJETAS LIMPIAS */
+        .card {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            width: 260px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            border-color: #007bff;
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .card p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-buy {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-buy:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
-<body class="bg-slate-950">
+<body>
 
-    <header class="py-16 text-center bg-gradient-to-b from-slate-900 to-slate-950 border-b border-blue-900/30">
-        <h1 class="text-6xl font-black italic tracking-tighter text-white">AC <span class="text-blue-500">STORE</span></h1>
-        <p class="text-blue-400 mt-2 font-bold uppercase tracking-widest text-sm">Desarrollo Profesional para Servidores Roleplay</p>
-    </header>
-
-    <div class="max-w-6xl mx-auto px-6 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            
-            <div class="store-card">
-                <div class="h-40 bg-blue-600 flex items-center justify-center">
-                    <span class="text-5xl">👕</span>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold">Skins Personalizadas</h2>
-                        <span class="price-tag">3 USD</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-6">Skins exclusivas con texturas de alta calidad y rigging optimizado para 0.3.7.</p>
-                    <a href="https://discord.gg/KfMFjpbQdJ" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">ORDENAR AHORA</a>
-                </div>
-            </div>
-
-            <div class="store-card">
-                <div class="h-40 bg-indigo-600 flex items-center justify-center">
-                    <span class="text-5xl">🏗️</span>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold">Map Único</h2>
-                        <span class="price-tag">5 USD</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-6">Mapeos exclusivos para bases, interiores o zonas de rol sin caídas de FPS.</p>
-                    <a href="https://discord.gg/KfMFjpbQdJ" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">ORDENAR AHORA</a>
-                </div>
-            </div>
-
-            <div class="store-card">
-                <div class="h-40 bg-slate-800 flex items-center justify-center border-b border-blue-500">
-                    <span class="text-5xl">💻</span>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold">GM Roleplay Zone</h2>
-                        <span class="price-tag">10 USD</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-6">Gamemode base Roleplay Zone optimizada, corregida y lista para hostear.</p>
-                    <a href="https://discord.gg/KfMFjpbQdJ" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">ORDENAR AHORA</a>
-                </div>
-            </div>
-
-        </div>
+    <div class="sidebar">
+        <h1>AC MODS</h1>
+        <button onclick="document.getElementById('gms').scrollIntoView()">GAMEMODES</button>
+        <button onclick="document.getElementById('skins').scrollIntoView()">SKINS</button>
+        <button onclick="document.getElementById('maps').scrollIntoView()">MAPAS</button>
     </div>
 
-    <footer class="py-12 text-center text-gray-600 border-t border-slate-900">
-        <p class="font-bold tracking-widest">© 2026 AC STORE | ARIEL CARNECI</p>
-        <p class="text-xs mt-2 uppercase">Calidad Garantizada en cada proyecto</p>
-    </footer>
+    <div class="main-content">
+        
+        <div class="section-owners">
+            <h2>Management & Owners</h2>
+            <div class="owner-names">ARIEL & ALEJANDRO</div>
+            <p style="color: #555; margin: 5px 0 0 0;">Responsables del desarrollo y calidad</p>
+        </div>
+
+        <div id="gms" class="product-section">
+            <h2>APARTADO: GAMEMODES (GM)</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>GM ROLEPLAY Y GM ZONE </h3>
+                    <p>Base optimizada 0.3.7 Y 100% Funcional Nosotros mismo la ponemos</p>
+                    <button class="btn-buy">COMPRAR AHORA</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="skins" class="product-section">
+            <h2>APARTADO: SKINS PERSONALIZADAS</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Skin Personalizada a Tu Gusto</h3>
+                    <p>Texturas HD optimizadas</p>
+                    <button class="btn-buy">COMPRAR AHORA</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="maps" class="product-section">
+            <h2>APARTADO: MAPAS ÚNICOS</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Mapeos Unicos y Exclusivos</h3>
+                    <p>Mapeo único sin lag</p>
+                    <button class="btn-buy">COMPRAR AHORA</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>

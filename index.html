@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC STORE - Official Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0b0f1a; color: white; font-family: 'Inter', sans-serif; }
+        .store-card { background: #161b2b; border: 1px solid #2d3748; border-radius: 12px; overflow: hidden; transition: 0.3s; }
+        .store-card:hover { border-color: #3b82f6; transform: scale(1.02); }
+        .price-tag { background-color: #10b981; color: white; padding: 4px 12px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; }
+    </style>
+</head>
+<body class="bg-slate-950">
+
+    <header class="py-16 text-center bg-gradient-to-b from-slate-900 to-slate-950 border-b border-blue-900/30">
+        <h1 class="text-6xl font-black italic tracking-tighter text-white">AC <span class="text-blue-500">STORE</span></h1>
+        <p class="text-blue-400 mt-2 font-bold uppercase tracking-widest text-sm">Desarrollo Profesional para Servidores Roleplay</p>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            <div class="store-card">
+                <div class="h-40 bg-blue-600 flex items-center justify-center">
+                    <span class="text-5xl">👕</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Skins Personalizadas</h2>
+                        <span class="price-tag">3 USD</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Skins exclusivas con texturas de alta calidad y rigging optimizado para 0.3.7.</p>
+                    <a href="https://discord.gg/KfMFjpbQdJ" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">ORDENAR AHORA</a>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <div class="h-40 bg-indigo-600 flex items-center justify-center">
+                    <span class="text-5xl">🏗️</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Map Único</h2>
+                        <span class="price-tag">5 USD</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Mapeos exclusivos para bases, interiores o zonas de rol sin caídas de FPS.</p>
+                    <a href="https://discord.gg/KfMFjpbQdJ" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">ORDENAR AHORA</a>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <div class="h-40 bg-slate-800 flex items-center justify-center border-b border-blue-500">
+                    <span class="text-5xl">💻</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">GM Roleplay Zone</h2>
+                        <span class="price-tag">10 USD</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Gamemode base Roleplay Zone optimizada, corregida y lista para hostear.</p>
+                    <a href="https://discord.gg/KfMFjpbQdJ" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">ORDENAR AHORA</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="py-12 text-center text-gray-600 border-t border-slate-900">
+        <p class="font-bold tracking-widest">© 2026 AC STORE | ARIEL CARNECI</p>
+        <p class="text-xs mt-2 uppercase">Calidad Garantizada en cada proyecto</p>
+    </footer>
+
+</body>
+</html>

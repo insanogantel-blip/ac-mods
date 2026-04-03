@@ -3,223 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AC MODS | Tienda Oficial</title>
+    <title>AC MODS | Store</title>
     <style>
-        /* CONFIGURACIÓN BASE */
-        body {
-            background-color: #050505;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
+        :root { --blue: #007bff; --bg: #050505; }
+        body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
 
-        /* BARRA LATERAL (PC) */
-        .sidebar {
-            width: 240px;
-            background-color: #000b1a;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            border-right: 2px solid #007bff;
-            flex-shrink: 0;
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .sidebar h1 {
-            color: #007bff;
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 40px;
-            text-shadow: 0 0 10px #007bff;
-            letter-spacing: 2px;
-        }
-
-        .sidebar button {
-            background: rgba(0, 123, 255, 0.05);
-            color: #cbd5e0;
-            border: 1px solid #004a99;
-            padding: 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            text-align: left;
-        }
-
-        .sidebar button:hover {
-            background: #007bff;
-            color: white;
-            transform: translateX(8px);
-        }
-
-        /* CONTENIDO PRINCIPAL */
-        .main-content {
-            flex-grow: 1;
-            padding: 40px;
-            overflow-y: auto;
-            background: radial-gradient(circle at top right, #001a33 0%, #050505 100%);
-            scroll-behavior: smooth;
-        }
-
-        /* APARTADO OWNERS */
-        .section-owners {
-            background: rgba(0, 123, 255, 0.07);
-            border: 1px solid #007bff;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 50px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .owner-names {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-
-        /* SECCIONES */
-        .product-section { margin-bottom: 60px; }
-        .product-section h2 {
-            border-left: 6px solid #007bff;
-            padding-left: 15px;
-            color: #00a2ff;
-            text-transform: uppercase;
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; 
-        }
-
-        .card {
-            background: rgba(15, 15, 15, 0.8);
-            border: 1px solid #222;
-            border-radius: 15px;
-            padding: 25px;
-            transition: 0.4s;
-            text-align: center;
-        }
-
-        .card:hover {
-            border-color: #007bff;
-            transform: translateY(-10px);
-        }
-
-        .btn-buy {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .btn-buy:hover { background: #00ff88; color: #000; box-shadow: 0 0 15px #00ff88; }
-
-        /* REPRODUCTOR */
-        .music-player {
+        /* PANTALLA DE CARGA - REFORMADA */
+        #loader {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: rgba(0, 11, 26, 0.95);
-            border: 1px solid #007bff;
-            padding: 15px;
-            border-radius: 20px;
-            z-index: 9999;
-            text-align: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--blue);
+            display: none; /* Inicia oculto */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
         }
 
-        audio { height: 35px; width: 220px; }
+        /* SIDEBAR */
+        .sidebar { width: 250px; background: #000b1a; border-right: 2px solid var(--blue); padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .sidebar h1 { color: var(--blue); text-align: center; font-size: 1.5rem; }
+        .sidebar button { background: rgba(0,123,255,0.1); color: white; border: 1px solid var(--blue); padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; text-align: left; }
+        .sidebar button.active { background: var(--blue); }
 
-        /* AJUSTES PARA MÓVIL */
-        @media (max-width: 768px) {
-            body { flex-direction: column; overflow: auto; }
-            .sidebar { 
-                width: 100%; 
-                height: auto; 
-                flex-direction: row; 
-                overflow-x: auto; 
-                padding: 10px; 
-                border-right: none; 
-                border-bottom: 2px solid #007bff;
-            }
-            .sidebar h1 { display: none; }
-            .sidebar button { padding: 8px 12px; font-size: 0.7rem; white-space: nowrap; }
-            .main-content { height: auto; padding: 20px; }
-            .owner-names { font-size: 1.5rem; }
-            .music-player { width: 80%; left: 10%; right: 10%; bottom: 10px; padding: 10px; }
-            audio { width: 100%; }
-        }
+        /* CONTENIDO */
+        .main-content { flex-grow: 1; padding: 40px; background: radial-gradient(circle at top right, #001a33, #050505); overflow-y: auto; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid #222; text-align: center; }
+        .btn-buy { background: var(--blue); border: none; padding: 10px; width: 100%; color: white; font-weight: bold; cursor: pointer; margin-top: 10px; border-radius: 5px; }
+
+        /* MOUSE */
+        #fire { position: fixed; width: 10px; height: 10px; background: var(--blue); border-radius: 50%; pointer-events: none; box-shadow: 0 0 15px var(--blue); z-index: 10001; transform: translate(-50%, -50%); }
     </style>
 </head>
 <body>
 
+    <div id="loader">
+        <h1 style="font-size: 5rem; margin: 0;">[AC]</h1>
+        <p style="letter-spacing: 5px;">CARGANDO ZONA...</p>
+    </div>
+
+    <div id="fire"></div>
+
     <div class="sidebar">
         <h1>AC MODS</h1>
-        <button onclick="document.getElementById('gms').scrollIntoView({behavior: 'smooth'})">GAMEMODES</button>
-        <button onclick="document.getElementById('skins').scrollIntoView({behavior: 'smooth'})">SKINS</button>
-        <button onclick="document.getElementById('maps').scrollIntoView({behavior: 'smooth'})">MAPAS</button>
+        <button class="tab-link active" onclick="changeTab(this, 'gms')">GAMEMODES</button>
+        <button class="tab-link" onclick="changeTab(this, 'skins')">SKINS</button>
+        <button class="tab-link" onclick="changeTab(this, 'maps')">MAPAS</button>
+        <button class="tab-link" onclick="changeTab(this, 'soporte')">SOPORTE</button>
     </div>
 
     <div class="main-content">
-        <div class="section-owners">
-            <h2 style="color:#007bff; font-size: 0.8rem; letter-spacing: 3px;">OWNERS & MANAGEMENT</h2>
-            <div class="owner-names">ARIEL & ALEJANDRO</div>
-        </div>
-
-        <div id="gms" class="product-section">
-            <h2>Apartado: Gamemodes</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>GM ROLEPLAY Y GM ZONES</h3>
-                    <p style="color:#666">Base optimizada 0.3.7. Nosotros mismos te la instalamos.</p>
-                    <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3', '_blank')">Comprar Ahora</button>
-                </div>
+        <div id="gms" class="tab-content active">
+            <h2>CATEGORIA: GAMEMODES</h2>
+            <div class="card">
+                <h3>GM ROLEPLAY PROFESIONAL</h3>
+                <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3')">COMPRAR</button>
             </div>
         </div>
 
-        <div id="skins" class="product-section">
-            <h2>Apartado: Skins</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>SKIN EXCLUSIVO</h3>
-                    <p style="color:#666">Skin Personalizada al Gusto.</p>
-                    <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3', '_blank')">Comprar Ahora</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="maps" class="product-section">
-            <h2>Apartado: Mapas</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>MAPEOS UNICOS Y EXCLUSIVOS</h3>
-                    <p style="color:#666">Mapeo único sin lag.</p>
-                    <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3', '_blank')">Comprar Ahora</button>
-                </div>
-            </div>
-        </div>
+        <div id="skins" class="tab-content"><h2>CATEGORIA: SKINS</h2></div>
+        <div id="maps" class="tab-content"><h2>CATEGORIA: MAPAS</h2></div>
+        <div id="soporte" class="tab-content"><h2>SOPORTE TECNICO</h2></div>
     </div>
 
-    <div class="music-player">
-        <p style="margin:0 0 10px 0; font-size: 10px; color:#007bff;">🎵 AC MODS RADIO</p>
-        <audio id="bg-music" controls loop>
-            <source src="https://files.catbox.moe/dzta7y.mp4" type="audio/mpeg">
-            Tu navegador no soporta audio.
-        </audio>
-    </div>
+    <script>
+        // Seguimiento de mouse
+        const fire = document.getElementById('fire');
+        document.addEventListener('mousemove', (e) => {
+            fire.style.left = e.clientX + 'px';
+            fire.style.top = e.clientY + 'px';
+        });
 
+        // FUNCIÓN DEFINITIVA PARA CAMBIAR PESTAÑAS
+        function changeTab(btn, tabId) {
+            const loader = document.getElementById('loader');
+            
+            // 1. Mostrar el cargador
+            loader.style.display = 'flex';
+
+            // 2. Esperar 500ms y hacer el cambio
+            setTimeout(() => {
+                // Quitar 'active' de todos los contenidos
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                // Quitar 'active' de todos los botones
+                document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+
+                // Activar el nuevo contenido
+                document.getElementById(tabId).classList.add('active');
+                // Activar el nuevo botón
+                btn.classList.add('active');
+
+                // 3. ¡MUY IMPORTANTE! Apagar el cargador
+                loader.style.display = 'none';
+
+            }, 500); 
+        }
+    </script>
 </body>
 </html>

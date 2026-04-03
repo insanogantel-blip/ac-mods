@@ -6,100 +6,125 @@
     <title>AC MODS | Store</title>
     <style>
         :root { --blue: #007bff; --bg: #050505; }
-        body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; cursor: crosshair; }
 
         /* PANTALLA DE CARGA - REFORMADA */
         #loader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: var(--blue);
-            display: none; /* Inicia oculto */
+            display: none; /* Inicia oculto por seguridad */
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10000;
+            z-index: 99999;
         }
 
         /* SIDEBAR */
-        .sidebar { width: 250px; background: #000b1a; border-right: 2px solid var(--blue); padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .sidebar h1 { color: var(--blue); text-align: center; font-size: 1.5rem; }
-        .sidebar button { background: rgba(0,123,255,0.1); color: white; border: 1px solid var(--blue); padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; text-align: left; }
-        .sidebar button.active { background: var(--blue); }
+        .sidebar { width: 250px; background: #000b1a; border-right: 2px solid var(--blue); padding: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+        .sidebar h1 { color: var(--blue); text-align: center; font-size: 1.5rem; text-shadow: 0 0 10px var(--blue); }
+        .sidebar button { background: rgba(0,123,255,0.1); color: white; border: 1px solid var(--blue); padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; text-align: left; font-weight: bold; }
+        .sidebar button.active { background: var(--blue); box-shadow: 0 0 15px var(--blue); }
 
         /* CONTENIDO */
         .main-content { flex-grow: 1; padding: 40px; background: radial-gradient(circle at top right, #001a33, #050505); overflow-y: auto; }
         .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid #222; text-align: center; }
-        .btn-buy { background: var(--blue); border: none; padding: 10px; width: 100%; color: white; font-weight: bold; cursor: pointer; margin-top: 10px; border-radius: 5px; }
+        .card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid #222; text-align: center; margin-bottom: 20px; }
+        .btn-buy { background: var(--blue); border: none; padding: 12px; width: 100%; color: white; font-weight: bold; cursor: pointer; margin-top: 15px; border-radius: 8px; }
 
         /* MOUSE */
-        #fire { position: fixed; width: 10px; height: 10px; background: var(--blue); border-radius: 50%; pointer-events: none; box-shadow: 0 0 15px var(--blue); z-index: 10001; transform: translate(-50%, -50%); }
+        #fire { position: fixed; width: 12px; height: 12px; background: var(--blue); border-radius: 50%; pointer-events: none; box-shadow: 0 0 20px var(--blue); z-index: 100000; transform: translate(-50%, -50%); }
+
+        /* REPRODUCTOR */
+        .music-box { position: fixed; bottom: 25px; right: 25px; background: #001126; border: 2px solid var(--blue); padding: 15px; border-radius: 20px; z-index: 9999; text-align: center; box-shadow: 0 0 20px rgba(0, 123, 255, 0.4); width: 250px; }
+        .music-box p { margin: 0 0 10px 0; font-size: 12px; color: var(--blue); font-weight: bold; }
+        audio { height: 35px; width: 100%; filter: invert(100%) hue-rotate(180deg) brightness(1.8); }
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <h1 style="font-size: 5rem; margin: 0;">[AC]</h1>
-        <p style="letter-spacing: 5px;">CARGANDO ZONA...</p>
+        <h1 style="font-size: 5rem; margin: 0; font-weight: 900; color: white;">[AC]</h1>
+        <p style="letter-spacing: 5px; font-weight: bold; color: white;">CARGANDO ZONA...</p>
     </div>
 
     <div id="fire"></div>
+
+    <div class="music-box">
+        <p>🎵 AC MODS RADIO</p>
+        <audio id="myaudio" controls loop>
+            <source src="https://files.catbox.moe/dzta7y.mp4" type="audio/mpeg">
+        </audio>
+    </div>
 
     <div class="sidebar">
         <h1>AC MODS</h1>
         <button class="tab-link active" onclick="changeTab(this, 'gms')">GAMEMODES</button>
         <button class="tab-link" onclick="changeTab(this, 'skins')">SKINS</button>
         <button class="tab-link" onclick="changeTab(this, 'maps')">MAPAS</button>
-        <button class="tab-link" onclick="changeTab(this, 'soporte')">SOPORTE</button>
+        <button class="tab-link" onclick="changeTab(this, 'soporte')">SOPORTE TÉCNICO</button>
+        <button class="tab-link" onclick="changeTab(this, 'gratis')" style="color: #00ff88;">ZONA GRATIS</button>
     </div>
 
     <div class="main-content">
         <div id="gms" class="tab-content active">
-            <h2>CATEGORIA: GAMEMODES</h2>
-            <div class="card">
-                <h3>GM ROLEPLAY PROFESIONAL</h3>
-                <button class="btn-buy" onclick="window.open('https://discord.gg/wq44EuJcp3')">COMPRAR</button>
+            <h2 style="color: var(--blue);">CATEGORIA: GAMEMODES</h2>
+            <div class="card"><h3>GM ROLEPLAY PROFESIONAL</h3><button class="btn-buy">ADQUIRIR</button></div>
+        </div>
+        <div id="skins" class="tab-content"><h2>CATEGORIA: SKINS</h2><div class="card"><h3>SKINS EXCLUSIVAS</h3><button class="btn-buy">COMPRAR</button></div></div>
+        <div id="maps" class="tab-content"><h2>CATEGORIA: MAPAS</h2><div class="card"><h3>MAPEOS PREMIUM</h3><button class="btn-buy">COMPRAR</button></div></div>
+        <div id="soporte" class="tab-content">
+            <h2>EQUIPO TÉCNICO</h2>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <div class="card" style="width: 150px;"><h3>ARIEL</h3><p style="color: var(--blue);">OWNER</p></div>
+                <div class="card" style="width: 150px;"><h3>ALEJANDRO</h3><p style="color: var(--blue);">OWNER</p></div>
             </div>
         </div>
-
-        <div id="skins" class="tab-content"><h2>CATEGORIA: SKINS</h2></div>
-        <div id="maps" class="tab-content"><h2>CATEGORIA: MAPAS</h2></div>
-        <div id="soporte" class="tab-content"><h2>SOPORTE TECNICO</h2></div>
+        <div id="gratis" class="tab-content"><h2>ZONA GRATIS</h2><div class="card"><h3>APORTE FREE</h3><button class="btn-buy" style="background:#333">DESCARGAR</button></div></div>
     </div>
 
     <script>
-        // Seguimiento de mouse
+        // MOUSE
         const fire = document.getElementById('fire');
         document.addEventListener('mousemove', (e) => {
             fire.style.left = e.clientX + 'px';
             fire.style.top = e.clientY + 'px';
         });
 
-        // FUNCIÓN DEFINITIVA PARA CAMBIAR PESTAÑAS
+        // FUNCIÓN DE CAMBIO DE PESTAÑA (MEJORADA)
         function changeTab(btn, tabId) {
             const loader = document.getElementById('loader');
             
-            // 1. Mostrar el cargador
+            // Forzar que el loader aparezca
             loader.style.display = 'flex';
 
-            // 2. Esperar 500ms y hacer el cambio
+            // El cambio de contenido ocurre después de 400ms
             setTimeout(() => {
-                // Quitar 'active' de todos los contenidos
-                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-                // Quitar 'active' de todos los botones
-                document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+                const contents = document.getElementsByClassName('tab-content');
+                for (let i = 0; i < contents.length; i++) {
+                    contents[i].classList.remove('active');
+                }
 
-                // Activar el nuevo contenido
+                const links = document.getElementsByClassName('tab-link');
+                for (let i = 0; i < links.length; i++) {
+                    links[i].classList.remove('active');
+                }
+
                 document.getElementById(tabId).classList.add('active');
-                // Activar el nuevo botón
                 btn.classList.add('active');
 
-                // 3. ¡MUY IMPORTANTE! Apagar el cargador
+                // DOBLE SEGURIDAD: Apagar el loader
                 loader.style.display = 'none';
+            }, 400);
 
-            }, 500); 
+            // TERCERA SEGURIDAD: Si por alguna razón el código anterior falla,
+            // esto apagará el loader sí o sí a los 800ms.
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 800);
         }
     </script>
 </body>
